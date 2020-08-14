@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Send your friend funny GIFs through ChatApp",
+    "githubUrl": "https://github.com/abraeva98/ChatApp.git"
   }
 }
