@@ -1,52 +1,99 @@
-import React, { useState, useCallback, useEffect } from 'react'
-import { GiftedChat } from 'react-native-gifted-chat'
-import io from 'socket.io-client';
+import React from 'react';
+import { GiftedChat } from 'react-native-gifted-chat';
+import { connect } from 'react-redux';
+import { openChat, sendMessage } from '../store/index';
 
-export default function Chat() {
-  const [messages, setMessages] = useState([]);
+class Chat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.send = this.send.bind(this);
+  }
 
-  useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-      {
-        _id: 2,
-        text: 'I am here',
-        createdAt: new Date(),
-        user: {
-          _id: 3,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ])
-    this.socket = io("http://192.168.1.7:3000");
-  }, [])
+  componentDidMount() {
+    openChat({ user: this.props.user, receiver: this.props.receiver });
+  }
 
-  const onSend = useCallback((messages = []) => {
-    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-    // this.socket.emit('chat message', messages)
-    messages.map(msg => (this.socket.emit('chat message', msg.text)))
-  }, [])
+  send(message) {
+    sendMessage(message.text, this.props.user, this.props.receiver);
+  }
 
-  return (
-    <GiftedChat
-      messages={messages}
-      onSend={messages => onSend(messages)}
-      user={{
-        _id: 5,
-      }}
-    />
-  )
+  render() {
+    return (
+      <GiftedChat
+        messages={ this.props.messages }
+        user={{
+          _id: this.props.user.id
+        }}
+        onSend={ message => this.send(message[0])}
+      />
+    );
+  }
 }
+
+const mapState = (state, { navigation }) => ({
+  messages: state.messages,
+  user: state.user,
+  receiver: navigation.getParam('receivingUser')
+});
+
+export default connect(mapState)(Chat);
+
+
+
+
+
+
+
+
+// import React, { useState, useCallback, useEffect } from 'react'
+// import { GiftedChat } from 'react-native-gifted-chat'
+// import io from 'socket.io-client';
+
+// export default function Chat() {
+//   const [messages, setMessages] = useState([]);
+
+//   useEffect(() => {
+//     setMessages([
+//       {
+//         _id: 1,
+//         text: 'Hello developer',
+//         createdAt: new Date(),
+//         user: {
+//           _id: 2,
+//           name: 'React Native',
+//           avatar: 'https://placeimg.com/140/140/any',
+//         },
+//       },
+//       {
+//         _id: 2,
+//         text: 'I am here',
+//         createdAt: new Date(),
+//         user: {
+//           _id: 3,
+//           name: 'React Native',
+//           avatar: 'https://placeimg.com/140/140/any',
+//         },
+//       },
+//     ])
+//     this.socket = io("http://192.168.1.7:3000");
+//   }, [])
+
+//   const onSend = useCallback((messages = []) => {
+//     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+//     // this.socket.emit('chat message', messages)
+//     messages.map(msg => (this.socket.emit('chat message', msg.text)))
+//   }, [])
+
+//   return (
+//     <GiftedChat
+//       messages={messages}
+//       onSend={messages => onSend(messages)}
+//       user={{
+//         _id: 5,
+//       }}
+//     />
+//   )
+// }
 // import { StatusBar } from 'expo-status-bar';
 // import React from 'react';
 // import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, Platform } from 'react-native';
