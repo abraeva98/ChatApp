@@ -8,7 +8,7 @@ const Conversation = db.define('conversation', {
 
 Conversation.findOrCreateConversation = async function(user1Id, user2Id) {
   try {
-    const [instance, wasCreated] = await Conversation.findOne({
+    const [instance, wasCreated] = await Conversation.findOrCreate({
             where: {
               user1Id: {
                 [Op.or]: [user1Id, user2Id]

@@ -2,9 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store/index';
 import { createStackNavigator } from 'react-navigation-stack'
-import {
-  createAppContainer
-} from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './components/Login';
 import Users from './components/Users';

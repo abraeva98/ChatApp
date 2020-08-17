@@ -11,7 +11,7 @@ const Message = db.define('message', {
       primaryKey: true
     }
   });
-  
+
 Message.createMessage = async (text, sender, receiver) => {
     try {
         console.log(sender)
