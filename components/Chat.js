@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { openChat, sendMessage } from '../store/index';
 
 class Chat extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.send = this.send.bind(this);
   }
 
@@ -14,10 +14,12 @@ class Chat extends React.Component {
   }
 
   send(message) {
+    
     sendMessage(message.text, this.props.user, this.props.receiver);
   }
 
   render() {
+    console.log(this.props, "Props")
     return (
       <GiftedChat
         messages={ this.props.messages }

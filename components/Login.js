@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { login } from '../store/index';
+
 
 export default class Login extends React.Component {
   constructor() {
@@ -22,9 +23,11 @@ export default class Login extends React.Component {
   }
 
   render() {
+    const image = { uri: 'https://www.nicepng.com/png/detail/965-9650980_goofy-vector-vectores-pinterest-disney-iphone-wallpaper-goofy.png' }
     return (
-      <View style={ styles.container }>
-        <Text style={ styles.text }>Enter your name and password:</Text>
+        <ImageBackground source={image} style={styles.image} >
+        <View style={ styles.container }>
+        <Text style={ styles.text }>User Name:</Text>
         <TextInput
           onChangeText={ value => this.handleChange('name', value) }
           returnKeyType='next'
@@ -32,6 +35,7 @@ export default class Login extends React.Component {
           onSubmitEditing={ () => this.passwordInput.focus() }
           style={ styles.input }
         />
+        <Text style={ styles.text }>Password:</Text>
         <TextInput
           onChangeText={ value => this.handleChange('password', value)}
           secureTextEntry
@@ -47,6 +51,7 @@ export default class Login extends React.Component {
           <Text style={ styles.buttonText } >Login</Text>
         </TouchableOpacity>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -55,13 +60,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'powderblue',
     height: '100%',
     width: '100%'
   },
   text: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   input: {
     height: 40,
@@ -71,11 +75,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     color: '#000',
     textAlign: 'center',
-    marginTop: 10
+    marginTop: 10,
   },
   button: {
     width: '75%',
-    backgroundColor: 'blue',
+    backgroundColor: 'orange',
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
@@ -87,5 +91,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
   }
 });

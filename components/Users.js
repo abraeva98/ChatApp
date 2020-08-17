@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'steelblue',
+    backgroundColor: 'orange',
     height: '100%',
     width: '100%'
   },
@@ -57,23 +57,24 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
+    backgroundColor: 'white'
   },
   name: {
     textAlign: 'center',
-    color: '#fff',
+    color: 'orange',
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 20
   },
   buttonContainer: {
     borderRadius: 50,
-    backgroundColor: '#fff',
+    backgroundColor: 'orange',
     paddingVertical: 15,
     width: '75%'
   },
   buttonText: {
-    color: 'steelblue',
+    color: 'white',
     textAlign: 'center'
   }
 });

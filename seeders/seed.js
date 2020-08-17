@@ -5,12 +5,12 @@ const User = require('../server/db/user');
 // const { InteractionManager } = require('react-native');
 // const { default: Users } = require('./components/Users');
 
-const conversations = [ 
-    { name: 'really_random' },
-    { name: 'generally_speaking' },
-    { name: 'dogs_of_fullstack' },
-    { name: 'lunch_planning' }
-  ];
+// const conversations = [ 
+//     { name: 'really_random' },
+//     { name: 'generally_speaking' },
+//     { name: 'dogs_of_fullstack' },
+//     { name: 'lunch_planning' }
+//   ];
   
 const users = [{
     name: 'Irina',
@@ -30,10 +30,10 @@ const seed = () =>
     Promise.all(users.map(user => 
         User.create(user))
     )
-    .then(() => 
-    Promise.all(conversations.map(chat => 
-        Conversation.create(chat))
-        ))
+    // .then(() => 
+    // Promise.all(conversations.map(chat => 
+    //     Conversation.create(chat))
+    //     ))
     .then(()=>
      Promise.all(messages.map(msg => 
         Message.create(msg))

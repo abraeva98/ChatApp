@@ -9,8 +9,8 @@ export default class HomePage extends React.Component {
                 <ImageBackground source={image} style={styles.image} >
                     <Text style={styles.text}>Goofy Chat</Text>
                 </ImageBackground>
-                     <Button onPress={() => this.props.navigation.navigate('Chat')} 
-                      title="Start the chat" style={styles.startButton}/>
+                     <Button onPress={() => this.props.navigation.navigate('Login')} 
+                      title="Login" style={styles.startButton}/>
             </SafeAreaView>
         )
     }
@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
     startButton: {
         width: '100%',
         height: 70,
-        backgroundColor: 'pink',
+        backgroundColor: 'orange',
         justifyContent: "center",
     }, 
     text: {
         fontSize: 40,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     }
 })

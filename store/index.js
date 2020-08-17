@@ -7,7 +7,6 @@ let navigate;
 const reducers = combineReducers({ users, messages, user });
 const store = createStore(reducers);
 
-
 import socket from './socket';
 
 socket.on('priorMessages', messages => {

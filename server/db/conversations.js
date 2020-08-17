@@ -1,36 +1,30 @@
 const db = require('./db');
-const { Sequelize } = db;
-const { Op } = Sequelize;
+const Sequelize = require('sequelize');
+const { Op }= Sequelize;
 const Message = require('./msg')
 const Conversation = db.define('conversation', {
-    name: Sequelize.STRING
-});
-Conversation.findOrCreateConversation = function(user1Id, user2Id) {
-    return Conversation.find({
-      where: {
-        user1Id: {
-          [Op.or]: [user1Id, user2Id]
-        },
-        user2Id: {
-          [Op.or]: [user1Id, user2Id]
-        }
-      },
-      include: [ Message ],
-      order: [[ Message, 'createdAt', 'DESC' ]]
-    })
-      .then(conversation => {
-        if(conversation) {
-          return conversation;
-        } else {
-          return Conversation.create({
-            user1Id: user1Id,
-            user2Id: user2Id
-          }, {
-            include: [ Message ],
-            order: [[ Message, 'createdAt', 'DESC' ]]
-          });
-        }
-      });
-  };
   
+});
+
+Conversation.findOrCreateConversation = async function(user1Id, user2Id) {
+  try {
+    const [instance, wasCreated] = await Conversation.findOne({
+            where: {
+              user1Id: {
+                [Op.or]: [user1Id, user2Id]
+              },
+              user2Id: {
+                [Op.or]: [user1Id, user2Id]
+              }
+            },
+            include: {model: Message},
+            order: [[ Message, 'createdAt', 'DESC' ]]
+      })
+      console.log('CONVO', instance)
+      return instance;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = Conversation;

@@ -5,10 +5,11 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {
   createAppContainer
 } from 'react-navigation';
-// import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import Login from './components/Login';
 import Users from './components/Users';
 import Chat from './components/Chat';
+import HomePage from './components/HomePage';
 
 const RootStack = createStackNavigator({
   Login: {
@@ -19,9 +20,12 @@ const RootStack = createStackNavigator({
   },
   Chat: {
     screen: Chat
+  }, 
+  HomePage: {
+    screen: HomePage
   }
 }, {
-  initialRouteName: 'Login',
+  initialRouteName: 'HomePage',
   navigationOptions: {
     headerTitle: 'Chat!'
   }
@@ -33,7 +37,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={ store }>
-        <AppContainer />
+        <NavigationContainer>
+          <AppContainer />
+        </NavigationContainer>
       </Provider>
     );
   }
